@@ -22,9 +22,34 @@ simpler explanations **(Infrastructure, Platform, Software)** and focused on the
 </details>
 
 <details>
-
 <summary>2) Key differences between cloud IaaS, PaaS, SaaS, and CaaS</summary>
 
 ![qqqq](https://lh3.googleusercontent.com/Zpw-v4ZOiAkbLm9ARSl68tGaZFYsFsz1ABwRbl8Cj_ozj12jCTPmgVGKBARz3Xwum1CUsMQ7Hog=e14-rj-sc0xffffff-h2000-w2000)
+</details>
 
+<details>
+<summary>3) Pros and cons IaaS, CaaS, PaaS, SaaS</summary>
+
+#
+| Service model | Pros | Cons |
+| :---: | :---: | :---: |
+| **IaaS** | Highest level of control over infrastructure | Responsible for your own data security and recovery |  |
+| | On-demand scalability | Requires hands-on configuration and maintenance |  |
+| | No single point of failure for higher reliability | Difficulties securing legacy applications on cloud-based infrastructure | |
+| | Reduced upfront capital expenditures (for example, pay-as-you-go pricing) | |
+| | Fewer provisioning delays and wasted resources | |
+| | Accelerated development and time to market |  |                            
+| **CaaS** | Ideal for running, managing, and scaling microservices | Some CaaS solutions have limited language support available depending on the cloud service provider |
+|  | Streamlined development speeds up time to market | Container security risks may increase when using CaaS as they share the same kernel with the OS (although they are considered safer than VMs) |
+|  | More control and configuration of networks and application components |  |
+|  | Increases workload portability between environments, such as hybrid cloud and multicloud |  |
+|  | Built-in performance monitoring and container orchestration |  |
+| **PaaS**| Instant access to a complete, easy-to-use development platform | Application stack can be limited to the most relevant components |
+| | Cloud service provider is responsible for maintenance and securing infrastructure | Vendor lock-in may be an issue depending on the cloud service provider |
+| | Available over any internet connection on any device | Less control over operations and the overall infrastructure |
+| | On-demand scalability | More limited customizations |
+| **SaaS** | Easy to set up and start using | No control over any of the infrastructure or security controls |
+|  | The provider manages and maintains everything, from hardware to software | Integration issues with your existing tools and applications |
+|  | Software is accessible over any internet connection on any device | Vendor lock-in may be an issue depending on the cloud service provider |
+|  |  | Little to no customization |
 </details>
