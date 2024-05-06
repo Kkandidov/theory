@@ -1,6 +1,5 @@
 <details>
-
-<summary>What are on-Premises, IaaS, CaaS, PaaS, Faas, and SaaS</summary>
+<summary>1) What are on-Premises, IaaS, CaaS, PaaS, Faas, and SaaS</summary>
 
 #
 The cloud provides different ways to access its resources through three main service models: **Infrastructure (IaaS)**, **Platform (PaaS)**, and **Software (SaaS)**. These terms, sometimes referred to as cloud offerings 
@@ -20,5 +19,12 @@ simpler explanations **(Infrastructure, Platform, Software)** and focused on the
 **FaaS (Function as a Service):** Run specific pieces of code (functions) without managing the infrastructure or even the entire application. Imagine outsourcing small tasks to specialists.
 #
 **SaaS (Software as a Service):** Use software applications delivered entirely over the internet. It's like subscribing to an online service, no installation needed.
+</details>
+
+<details>
+
+<summary>2) Key differences between cloud IaaS, PaaS, SaaS, and CaaS</summary>
+
+![qqqq](https://lh3.googleusercontent.com/Zpw-v4ZOiAkbLm9ARSl68tGaZFYsFsz1ABwRbl8Cj_ozj12jCTPmgVGKBARz3Xwum1CUsMQ7Hog=e14-rj-sc0xffffff-h2000-w2000)
 
 </details>
