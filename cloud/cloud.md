@@ -22,7 +22,7 @@ simpler explanations **(Infrastructure, Platform, Software)** and focused on the
 </details>
 
 <details>
-<summary>2) Key differences between cloud IaaS, PaaS, SaaS, and CaaS</summary>
+<summary>2) Key differences between the different types of cloud service models</summary>
 
 ![qqqq](https://lh3.googleusercontent.com/Zpw-v4ZOiAkbLm9ARSl68tGaZFYsFsz1ABwRbl8Cj_ozj12jCTPmgVGKBARz3Xwum1CUsMQ7Hog=e14-rj-sc0xffffff-h2000-w2000)
 </details>
