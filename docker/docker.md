@@ -663,31 +663,89 @@ Remember, the ideal approach depends on your specific needs and the complexity o
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>26. What is the purpose of volumes in Docker?</summary>
+<br/>
 
+The purpose of volumes in Docker is to provide persistent storage for your containers. Here's the key takeaway:
+-   By default, data written inside a container is lost when the container stops or is removed.
+-   Volumes allow you to mount a directory on the host machine into the container's file system.
+-   This way, data written to the volume persists even after the container lifecycle events (stop, restart, removal).
 
+Think of volumes as external storage for your containers, ensuring important data survives container operations.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>27. Is it possible for a docker container to restart by itself?</summary>
+<br/>
 
+No, a Docker container cannot inherently restart by itself. Docker containers are designed to run until they are stopped or encounter an error. However, you can achieve a similar effect using two main approaches:
+1.  **Docker Restart Policy:**
+    -   Docker offers a restart policy that you can configure when starting a container. This policy defines what Docker should do if the container exits (stops).
+    -   The available policies include:
+        -   `no`: Container won't restart automatically (default).
+        -   `on-failure`: Restarts the container if it exits with a non-zero exit code (indicates an error). You can optionally specify a maximum number of retries.
+        -   `always`: Restarts the container regardless of the exit code.
 
+    -   While the restart policy doesn't enable the container to self-restart, it automates Docker's behavior when the container exits under certain conditions.  
+2.  **Supervisory Tools:**
+    -   You can use process supervision tools like `supervisord` or `s6` within your container. These tools can monitor the main process of your application and automatically restart it if it crashes or exits unexpectedly.
+    
+**In essence, Docker itself doesn't provide self-restarting functionality for containers. However, you can achieve a similar outcome using restart policies or process supervision tools within your containers.**
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>28. How do you expose ports in a docker container?</summary>
+<br/>
 
-
+There are two main ways to expose ports in a Docker container:
+1.  **Using the `-p` flag with `docker run`:**
+    This is the most common approach. When you run a container with the `docker run` command, you can use the `-p` flag to map a port on the host machine (your computer) to a port inside the container.
+    ```
+    docker run -p <host_port>:<container_port> <image_name>
+    ```
+    -   `<host_port>`: The port number you want to access on your host machine. You can choose any unused port.
+    -   `<container_port>`: The port number that the application inside the container is listening on.
+    -   `<image_name>`: The name of the Docker image you want to run.
+ 
+    With this configuration, you can access the web server application running in the container by visiting `http://localhost:8080` in your web browser.
+    
+2.  **Using the `EXPOSE` instruction in the Dockerfile (indirectly):**
+    The `EXPOSE` instruction in a Dockerfile is used to **document** which ports the image exposes. It doesn't actually publish the ports. This can be helpful for users of your image to understand which ports are relevant.
+    ```
+    EXPOSE <port_number>
+    ```
+    However, you can use the `-P` flag (uppercase P) with `docker run` to automatically publish all exposed ports (defined by `EXPOSE` instructions) in the image to random ports on the host machine. This is generally not recommended for production use as it can lead to unpredictable port assignments.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>29. How do you pass environment variables to a docker container?</summary>
+<br/>
 
-
+There are two primary ways to pass environment variables to a Docker container:
+1.  **Using the `-e` flag with `docker run`:**
+    This is the most common approach for setting environment variables during container creation. You use the `-e` flag (lowercase e) followed by the environment variable name and its value in the format `NAME=VALUE`.
+    ```
+    docker run -e <NAME>=<VALUE> <image_name>
+    ```
+    -   `<NAME>`: The name of the environment variable you want to set inside the container.
+    -   `<VALUE>`: The value you want to assign to the environment variable.
+    -   `<image_name>`: The name of the Docker image you want to run.
+   
+    Inside the container, you can access this environment variable using its name (e.g.,  `echo $API_KEY` would print `your_secret_key`).
+    
+2.  **Using a `.env` file (recommended for sensitive data):**
+    For security reasons, it's not recommended to expose sensitive information like API keys directly in the `docker run` command using the `-e` flag. Here's a more secure approach:
+    -   Create a file named `.env` in the same directory where you might run your `docker run` command.
+    -   Inside the `.env` file, define each environment variable on a separate line in the format `NAME=VALUE`.
+    Then, when running your container, use the `--env-file` flag with `docker run` to specify the path to your `.env` file:
+    ```
+    docker run --env-file .env my-app
+    ```
+    This way, the environment variables defined in your `.env` file are loaded securely without exposing sensitive values in the command line.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>30. ?</summary>
 
 
 </details>
