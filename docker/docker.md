@@ -769,15 +769,61 @@ The main difference between the Docker restart policies `no`,  `on-failure`, and
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>32. How do you update a docker image?</summary>
+<br/>
 
+Updating a Docker image involves making changes to the base image or its configuration and then rebuilding a new image with those updates. Here's the general process:
+**1. Make Changes:**
+-   There are two main approaches to make changes for an update:
+    -   **Modify the Dockerfile:** If the update involves changes to the application code or environment within the container, edit the Dockerfile that defines how the image is built.
+    -   **Update Configuration Files:** If the update involves adjustments to configuration files used by the application, you might be able to update those files directly within a running container and commit the changes to create a new image (not recommended for extensive configuration changes).
 
+**2. Rebuild the Image:**
+-   Once you've made the necessary changes, use the `docker build` command to rebuild the image. Specify the Dockerfile location (usually the current directory) and a tag to identify the new version of the image.
+    ```
+    docker build -t <image_name>:<new_tag> .
+    ```
+    -   `<image_name>`: The name of your Docker image.
+    -   `<new_tag>`: A tag to identify the updated version (e.g.,  `latest` for the most recent update or a version number for specific updates).
+ 
+**3. (Optional) Tag the Existing Image (not recommended):**
+-   While not recommended as a general practice, you can optionally tag the existing image with a new tag to indicate it's no longer the latest version. This might be helpful for tracking purposes. However, rebuilding a new image with updates is generally preferred.
+
+**4. Run Containers from the Updated Image:**
+-   After rebuilding the image, you can start new containers using the updated image tag. Existing containers will continue to run using the previous image version unless you stop and restart them with the updated image tag.
+
+**Important Considerations:**
+-   Updating running containers directly is not recommended. It's better to rebuild the image and start new containers from the updated version.
+-   Consider using version control for your Dockerfile to track changes and revert if necessary.
+-   Tagging strategies: You can use tags like `latest` for the most recent update or create version-specific tags (e.g.,  `v1.2.3`) for better version tracking.
+
+By following these steps, you can effectively update your Docker images to incorporate new features, bug fixes, or configuration changes.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>33. What is the difference between a base image and a child image in Docker?</summary>
+<br/>
 
+In Docker, the relationship between base images and child images is fundamental to understanding how images are built and layered. Here's a breakdown of the key differences:
+**Base Image:**
+-   A base image serves as the foundation for building new Docker images. It typically contains an operating system (OS) like Ubuntu, Alpine Linux, or a specific software environment pre-installed.
+-   Base images are often obtained from public repositories like Docker Hub, which offers a wide variety of base images for different purposes.
+-   You can consider a base image as a starting point or blueprint that provides the core functionalities your application needs to run.
 
+**Child Image:**
+-   A child image is a new image created by inheriting layers from a base image and adding additional layers on top. These additional layers can include your application code, configuration files, libraries, or other dependencies.
+-   Child images are typically smaller and more specific than base images because they only contain the necessary elements for your application to run.
+-   You can think of a child image as a customized version of the base image tailored to your specific requirements.
+
+**Here's an analogy:**
+Imagine a base image as a pre-built house foundation. It provides essential structures like walls and a roof. A child image would be your complete house built upon that foundation. You've added additional layers like rooms, furniture, and decorations to create the final living space that meets your needs.
+**Benefits of Using Base Images:**
+
+-   **Reduced Image Size:** By inheriting layers from a base image, child images are typically smaller, improving transfer and deployment times.
+-   **Reusability:** You can leverage existing base images with common functionalities, reducing redundant work.
+-   **Consistency:** Base images provide a standardized starting point, ensuring consistency across your containerized applications.
+
+**In essence, base images provide the building blocks, while child images are the final, customized applications you deploy in your containers.**
 </details>
 
 <details>
