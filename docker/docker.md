@@ -538,25 +538,88 @@ In conclusion, there's no fixed limit on the number of Docker containers per hos
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>21. Differentiate between Container logging and Daemon logging</summary>
+<br/>
 
+Here's a breakdown of the key differences between container logging and daemon logging in Docker:
+**Container Logging:**
+-   **Source:** Container logs originate from the processes running inside a specific Docker container. These logs typically contain information about the application's execution, errors, and debugging messages.
+-   **Focus:** Container logs provide insights into the behavior of the application running within the container. They help you troubleshoot issues specific to that container and its internal processes.
+-   **Location:** By default, container logs are written to standard output (stdout) and standard error (stderr) streams. You can capture these logs using the `docker logs` command or configure them to be sent to a centralized logging service.
+-   **Management:** The responsibility of managing and collecting container logs typically falls on the developer or application owner. They decide how to handle, store, and analyze these logs.
+
+**Daemon Logging:**
+-   **Source:** Daemon logs come from the Docker daemon itself (usually the `dockerd` process). These logs record events and activities related to the Docker engine's operation, such as container creation, removal, image management, and network interactions.
+-   **Focus:** Daemon logs provide information about the overall health and performance of the Docker engine. They help you identify issues with the Docker daemon itself or understand how the Docker engine is interacting with the system.
+-   **Location:** On most systems, Docker daemon logs are written to a file on the host machine. The default location typically varies depending on your operating system and Docker installation configuration. You can usually find the location specified in Docker documentation or configuration files.
+-   **Management:** The Docker daemon manages its own logs. However, you might have options to configure the logging level (debug, info, warn, etc.) or redirect the logs to a different location for easier access and analysis.
+
+**In simpler terms:**
+-   **Think of container logs as the diary of an individual application running in a container.** They tell you what's happening inside that specific container.
+-   **Daemon logs are like the logbook of the entire Docker captain.** They record the activities and events related to the overall management of Docker containers on the host machine.
+
+**Here's a table summarizing the key differences:**
+| Feature | Container Logging | Daemon Logging| 
+|--|--|--|
+| Source | Processes within container | Docker daemon (dockerd) |
+| Focus | Application behavior | Docker engine operation |
+| Location | stdout/stderr streams (default) | Host machine file (varies) |
+| Management | Application/developer responsibility | Docker daemon manages |
 
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>22. How will you use Docker for multiple application envitonment?</summary>
+<br/>
 
+Docker excels at managing multiple application environments due to its core concepts of containerization and image layering. Here's how you can leverage Docker for this purpose:
+**1. Containerized Applications:**
+-   Package each application you want to run in its own Docker container. This isolates the application's dependencies and runtime environment from other applications and the host system.
+**2. Environment-Specific Images:**
+-   Create separate Docker images for different environments (development, testing, staging, production). These images can have variations based on configuration files, environment variables, or even different base images.
+-   For example, your development image might include debugging tools, while your production image might be optimized for performance.
+**3. Docker Compose:**
+-   Use Docker Compose to define and manage all the services (containers) required for each environment in a single YAML file (docker-compose.yml). This file specifies the containers needed, their configurations, and how they interact with each other.
+-   With Docker Compose, you can easily bring up entire environments with a single command (e.g.,  `docker-compose up -d` for detached mode).
+**4. Environment Variables:**
+-   Leverage environment variables to configure your applications within the containers. This allows you to easily switch between environments by setting different values for these variables in each environment.
+-   You can set environment variables during container creation using the `-e` flag with the `docker run` command or define them in your Docker Compose configuration.
 
+**Benefits of using Docker for Multiple Environments:**
+-   **Consistency:** Docker ensures consistent environments across development, testing, and production by using the same Docker images.
+-   **Isolation:** Applications running in containers are isolated from each other and the host system, preventing conflicts and dependency issues.
+-   **Reproducibility:** Easily recreate any environment by building the corresponding Docker images. This simplifies deployments and troubleshooting.
+-   **Portability:** Docker images are portable across different systems, allowing you to move your applications between development machines, testing environments, and production servers with minimal changes.
+
+**Here's an example workflow:**
+1.  Develop your application in a container with development tools and configurations.
+2.  Use Docker Compose to define your development environment with all its dependencies (database, message queue, etc.).
+3.  Build separate Docker images for testing and production environments, potentially with optimized configurations.
+4.  Use Docker Compose to define the testing and production environments with their specific configurations and image versions.
+5.  Easily switch between environments by using different Docker Compose configurations and environment variable settings.
+
+By adopting this approach, Docker provides a streamlined and efficient way to manage multiple application environments, ensuring consistency, reproducibility, and easier deployments across your development lifecycle.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>23. Does Docker provide support for IPv6?</summary>
+<br/>
 
+Yes, Docker does provide support for IPv6 networking. Here's a breakdown of its capabilities:
+-   **Kernel Reliance:** Docker leverages the networking functionalities of the underlying operating system kernel. If the kernel has IPv6 enabled and configured, Docker can utilize it for container networking.
+-   **Container Configuration:** You can configure your containers to use IPv6. This includes assigning IPv6 addresses, setting up routing, and allowing applications within the container to access the IPv6 network.
+-   **Dual-Stack Support:** Docker can manage both IPv4 and IPv6 networks simultaneously. This enables containers to communicate using either protocol, depending on their configuration and the network environment.
 
+**Important Considerations:**
+-   **Host OS Compatibility:** Ensure your host machine's operating system kernel has IPv6 enabled and properly configured for Docker to integrate with it.
+-   **Docker Configuration:** You might need to specify specific IPv6 options when creating Docker networks or configuring container networking settings, depending on your desired setup.
+-   **Application Support:** Not all applications inherently support IPv6. Verify that your containerized applications are capable of utilizing IPv6 networking if needed.
+
+In summary, while Docker itself provides the foundation for running containers with IPv6 capabilities, it relies on the underlying host system's kernel support and proper configuration for successful implementation.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>24. How do you scale Docker containers horizontally?</summary>
 
 
 </details>
