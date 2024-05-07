@@ -1,5 +1,5 @@
 <details>
-<summary>1) What are on-Premises, IaaS, CaaS, PaaS, Faas, and SaaS</summary>
+<summary>1) What are the different types of cloud service models?</summary>
 
 #
 The cloud provides different ways to access its resources through three main service models: **Infrastructure (IaaS)**, **Platform (PaaS)**, and **Software (SaaS)**. These terms, sometimes referred to as cloud offerings 
