@@ -745,15 +745,27 @@ There are two primary ways to pass environment variables to a Docker container:
 </details>
 
 <details>
-<summary>30. ?</summary>
+<summary>30. What is the difference betwee docker restart polices "no", "on-failurer", "always"?</summary>
+<br/>
 
-
+The main difference between the Docker restart policies `no`,  `on-failure`, and `always` lies in their behavior when the container exits (stops):
+-   **no (default):**
+    -   This is the default behavior. If the container exits (stops), Docker won't automatically restart it.
+    -   Use this policy when you want the container to run only once and stop when it finishes its task. This is suitable for batch jobs or one-time processes.
+    
+-   **on-failure:**
+    -   Docker will only restart the container if it exits with a non-zero exit code. This typically indicates an error or unexpected termination of the application within the container.
+    -   You can optionally specify a maximum number of retries after which Docker will give up on restarting the container. This is useful for troubleshooting applications that might encounter errors during startup but can potentially recover on a retry.
+    
+-   **always:**
+    -   Docker will restart the container regardless of the exit code. This means the container will be restarted even if the application inside it exits successfully.
+    -   This policy is useful for critical services that must be running at all times, even if the application crashes or exits unexpectedly. However, it's important to understand why the container might be exiting and address any underlying issues to prevent continuous restarts.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>31. What is the difference between a Docker image and a container??</summary>
 
-
+![What is the difference between a Docker image and a container?](https://images.prismic.io/turing/658bf95d531ac2845a26f2b1_Image_07_08_23_at_1_27_PM_3edb52248a.webp?auto=format,compress)
 </details>
 
 <details>
