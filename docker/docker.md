@@ -301,39 +301,209 @@ In summary, hypervisors are powerful tools that enable efficient resource utiliz
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>14. How do you build a docker image using a docker file?</summary>
+<br/>
 
+Building a Docker image using a Dockerfile involves two main steps:
+1.  **Creating a Dockerfile:**    
+    -   This text file contains instructions for Docker to follow during the image building process.
+    -   The filename must be named "Dockerfile" (case-sensitive) and placed in the directory containing your application code or the starting point for your image.
+2.  **Building the Image:**
+    -   Once you have your Dockerfile ready, you can use the `docker build` command to instruct Docker to build the image based on the instructions in the Dockerfile.
+
+Here's a basic outline of the process:
+**1. Create a Dockerfile:**
+The structure of a Dockerfile can vary depending on the complexity of your application, but here's a common pattern for a simple application:
+```
+# Stage 1: Base Image
+FROM <base_image>:<tag>
+
+# Stage 2: Copy Application Code
+WORKDIR /app
+
+COPY . .  # Copies your current directory contents to /app in the container
+
+# Stage 3: Install Dependencies (if needed)
+RUN <package_manager> install <dependencies>  # Example: RUN apt-get update && apt-get install -y nginx
+
+# Stage 4: Expose Port (if needed)
+EXPOSE <port_number>  # Example: EXPOSE 80
+
+# Stage 5: Set Default Command (optional)
+CMD ["<command>", "<arguments>"]  # Example: CMD ["nginx", "-g", "daemon off;"]
+```
+
+**Explanation of the lines:**
+-   **FROM:** This line specifies the base image you want to use as the starting point for your image. This is usually a pre-built image like Ubuntu or a programming language runtime environment.
+-   **WORKDIR:** Sets the working directory within the container where subsequent commands will be executed.
+-   **COPY:** Copies files and directories from your local machine into the container's file system.
+-   **RUN:** Executes commands during the image build process, typically used for installing dependencies or performing configuration tasks.
+-   **EXPOSE:** Exposes a port on the container that can be mapped to a port on the host machine, allowing external access to the application running inside the container.
+-   **CMD:** Sets the default command that will be executed when the container starts. This is optional but can be useful for specifying how your application should run within the container.
+**2. Build the Image:**
+-   Open a terminal and navigate to the directory containing your Dockerfile.
+-   Use the following command to build the image:
+```
+docker build -t <image_name>:<tag> .
+```
+-   Replace `<image_name>` with a name for your image (e.g., my-app).
+-   Replace `<tag>` with a version tag (optional, defaults to "latest").
+-   The `.` at the end specifies the context (current directory) where the Dockerfile is located.
+
+This command will instruct Docker to follow the instructions in the Dockerfile and create a new Docker image named `<image_name>` with the specified tag.
+**Additional Tips:**
+-   You can break down your Dockerfile into multiple stages for better organization and efficiency.
+-   Use multi-stage builds to create smaller and more optimized final images.
+-   Leverage Docker Hub or other registries to share and reuse your images.
+
+By following these steps and understanding the basic structure of a Dockerfile, you can build customized Docker images for your applications, enabling consistent and portable deployments across different environments.
+</details>
+
+<details>
+<summary>15. How do you start and stop a docker container?</summary>
+<br/>
+
+**Starting a Docker container:**
+1.  **Locate the container name or ID:**
+    -   You can list all running and stopped containers using the `docker ps` command. This will display information about each container, including its name and ID.
+    -   If the container you want to start is stopped, you'll need its container ID, which is a long alphanumeric string.
+2.  **Start the container:**
+    -   Use the `docker start` command followed by the container name or ID:
+    ```
+    docker start <container_name_or_id>
+    ```
+**Stopping a Docker container:**
+1.  **Locate the container name or ID (if needed):**
+    -   Similar to starting, you might need the container name or ID if you don't have it readily available. Use `docker ps` to list containers.
+2.  **Stop the container:**
+    -   Use the `docker stop` command followed by the container name or ID:
+    ```
+    docker stop <container_name_or_id>
+    ```
+**Additional options:**
+-   **Starting a detached container:** If you want the container to run in the background and don't need to see its console output, you can use the `-d` flag with the `docker start` command:
+-   **Graceful shutdown:** The `docker stop` command sends a SIGTERM signal to the container, allowing it to gracefully stop any running processes before terminating.
+**Remember:**
+-   Ensure the Docker daemon is running before attempting to start or stop containers.
+-   Be cautious when using the `docker rm` command, as it permanently removes a container, even if it's stopped.
+</details>
+
+<details>
+<summary>16. How do you remove a docker container?</summary>
+<br/>
+
+There are two main ways to remove Docker containers, depending on whether the container is running or stopped:
+**Removing a Stopped Container:**
+The simplest way to remove a stopped Docker container is using the `docker rm` command:
+1.  **Identify the container:**
+    -   Use the `docker ps -a` command to list all containers, including both running and stopped ones. This will display information about each container, including its name and ID.
+2.  **Remove the container:**  
+    -   Use the `docker rm` command followed by the container name or ID:
+    ```
+    docker rm <container_name_or_id>
+    ```
+**Removing a Running Container:**
+There are two options for removing a running container:
+1.  **Stop and then remove:**
+    -   Follow the steps mentioned above to first stop the container using `docker stop <container_name_or_id>`.
+    -   Once stopped, you can remove it using `docker rm <container_name_or_id>`.
+2.  **Forcefully remove:**
+    -   Use the `-f` flag with the `docker rm` command to forcefully stop and remove the container in a single step:
+    ```
+    docker rm -f <container_name_or_id>
+    ```
+**Important points to remember:**
+-   **`docker rm` permanently removes the container.** There's no way to recover it after using this command.
+-   Be cautious when using the `-f` flag for forceful removal, especially if the container might have unsaved data.
+-   Make sure you understand the implications before removing a container, especially if it's part of a critical application or service.
+**Additional options:**
+-   You can remove multiple containers at once by specifying multiple container names or IDs after the `docker rm` command (separated by spaces).
+-   The `docker rm` command can also be used to remove exited containers, which are containers that have finished running but haven't been explicitly removed yet.
 
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>17. How do you remove all stopped containers and unused networks in docker?</summary>
+<br/>
 
+**Removing Stopped Containers:**
+There are two main approaches:
+1.  **Using `docker rm` with a filter:**
+    This method utilizes the `docker rm` command with a filter to target only stopped containers:
+    ```
+    docker rm $(docker ps -aq --filter status=stopped)
+    ```
+    -   Explanation:
+        -   `docker ps -aq`: Lists all container IDs in quiet mode (-q) and all formats (-a).
+        -   `--filter status=stopped`: Filters the output to only include containers with "stopped" status.
+        -   `$( )`: Captures the container IDs as output and assigns them to the shell variable.
+        -   `docker rm`: Removes the containers using the captured IDs.
+2.  **Using `docker system prune` (recommended):**
+    This is a cleaner and more efficient approach. The `docker system prune` command removes various unused Docker objects, including:
+    -   Stopped containers
+    -   Dangling images (images without associated containers)
+    -   Unused volumes (volumes not mounted to any containers)
+    -   Unused networks (networks not connected to any containers)
+    ```
+    docker system prune
+    ```
+    -   By default, it prompts for confirmation before deletion. You can use the `-f` flag to bypass the prompt:
+        ```
+        docker system prune -f
+    ```
+**Removing Unused Networks:**
+-   While `docker system prune` can handle unused networks, you can also target them specifically with a filter:
+    ```
+    docker network prune
+    ```
+    -   This removes networks that have no containers connected to them.
 
+**Choosing the method:**
+-   If you only want to remove stopped containers, either approach (`docker rm` with filter or `docker system prune`) will work.
+-   For a more comprehensive cleanup, including unused networks and other elements, use `docker system prune`.
+**Important points:**
+-   Both methods permanently remove the targeted objects. Make sure you have backups if necessary.
+-   Be cautious with `docker system prune -f` as it bypasses confirmation.
+
+Remember, using `docker system prune` is generally the recommended approach for a more complete cleanup of unused Docker resources.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>18. When a container exists, is it possible for you to loose data?</summary>
+<br/>
 
+Yes, data loss is possible even when a Docker container exists (i.e., is running). Here's why:
+**Data Persistence Issues:**
+-   **By default, container data is not persistent.** Changes made to the container's file system are temporary and disappear when the container stops. This is because containers share the underlying host system's kernel and don't have their own dedicated storage.
 
+**Scenarios where data can be lost:**
+-   **Container Stops:** When a container is stopped, any changes made to its file system are lost. This includes things like application data, configuration files, or temporary files created during runtime.
+-   **Container Crashes:** If a container crashes unexpectedly, any unsaved data within the container's file system will be lost.
+-   **Container Removal:** Removing a container, whether stopped or running, permanently deletes its associated data.
+
+**Solutions for Persistence:**
+Here's how to ensure data persistence in Docker:
+-   **Volumes:** Docker volumes provide a way to mount a directory on the Docker host machine into the container's file system. This allows data written to the volume to persist even when the container stops or is removed.
+-   **Bind Mounts:** Similar to volumes, bind mounts map a directory on the host machine to a directory inside the container. This is another way to persist data outside the container's ephemeral file system.
+
+**Remember:**
+-   Always consider data persistence strategies when working with Docker containers, especially if your application relies on storing important information.
+-   Volumes and bind mounts are the recommended methods for ensuring data survives container lifecycle events.
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>19. What is the docker compose?</summary>
 
+Docker Compose is a tool designed to simplify the development and deployment of multi-container Docker applications. It allows you to define and manage all the services (containers) and their configurations in a single file called a Docker Compose file (usually named `docker-compose.yml`).
 
-</details>
+Here's a breakdown of what Docker Compose offers:
+-   **Multi-container Applications:** Many applications consist of multiple interacting services. Docker Compose lets you define all these services in a single place, making it easier to manage and run them together.
+-   **Simplified Configuration:** Instead of managing individual container configurations, you specify requirements and configurations for each service in the Compose file. Docker Compose translates these definitions into commands for the Docker daemon.
+-   **Dependency Management:** Docker Compose helps manage dependencies between services. If one service relies on another, Compose ensures they are started in the correct order and dependencies are met.
+-   **Scalability:** You can easily scale your application by scaling individual services up or down within the Compose file. This simplifies managing resource allocation for your application.
+-   **Development Workflow:** Docker Compose streamlines the development process. You can define development environments with a single command, allowing developers to quickly start and test their applications with all dependencies running.
 
-<details>
-<summary>5. ?</summary>
-
-
-</details>
-
-<details>
-<summary>5. ?</summary>
-
-
+**In essence, Docker Compose acts as an orchestrator for your multi-container applications.** It takes care of the complexities of managing multiple containers, their configurations, and dependencies, making it easier to develop, deploy, and scale your Dockerized applications.
 </details>
 
 <details>
