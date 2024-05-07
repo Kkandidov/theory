@@ -280,8 +280,23 @@ In essence, a Dockerfile is the blueprint for creating a customized and self-con
 </details>
 
 <details>
-<summary>5. ?</summary>
+<summary>13. Tell about hypervisors and their functions</summary>
+<br/>
+  
+Hypervisors are like apartment managers for the computer world. They oversee the allocation of resources and create isolated environments on a single physical machine. This allows you to run multiple operating systems and applications simultaneously, just like having multiple tenants in an apartment building.
 
+Here's a breakdown of how hypervisors function:
+-   **Resource Management:** The hypervisor acts as a central authority, dividing the physical machine's resources (CPU, memory, storage) among different virtual machines (VMs). It ensures each VM gets the resources it needs to run efficiently and prevents VMs from interfering with each other's allocated resources.
+-   **Virtualization:** Hypervisors create a layer of abstraction between the physical hardware and the VMs. This allows VMs to have their own virtualized hardware resources, even though they share the underlying physical machine.
+-   **Isolation:** Each VM runs in its own isolated environment. This means changes made in one VM, like installing software or encountering errors, won't affect other VMs or the physical host machine. This isolation improves security and stability.
+-   **Security:** By isolating VMs from each other and the physical host, hypervisors make it more difficult for security vulnerabilities in one VM to compromise the entire system.
+
+There are two main types of hypervisors:
+
+- **Type 1 Hypervisors (Bare-metal hypervisors):** These hypervisors run directly on the physical hardware, without relying on an underlying operating system. They have direct access to the hardware resources and offer the best performance and security. Common examples include VMware ESXi, Microsoft Hyper-V.
+- **Type 2 Hypervisors (Hosted hypervisors):** These hypervisors run on top of an existing operating system like Windows or Linux. They are less resource-intensive than type 1 hypervisors but may have slightly lower performance. Common examples include Oracle VirtualBox, VMware Workstation Player.
+
+In summary, hypervisors are powerful tools that enable efficient resource utilization, improve security, and provide flexibility by allowing you to run multiple operating systems on a single physical machine. They are the foundation for cloud computing and server virtualization.
 
 </details>
 
