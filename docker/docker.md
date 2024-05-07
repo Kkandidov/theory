@@ -765,7 +765,7 @@ The main difference between the Docker restart policies `no`,  `on-failure`, and
 <details>
 <summary>31. What is the difference between a Docker image and a container??</summary>
 
-![What is the difference between a Docker image and a container?](https://images.prismic.io/turing/658bf95d531ac2845a26f2b1_Image_07_08_23_at_1_27_PM_3edb52248a.webp?auto=format,compress)
+![What is the difference between a Docker image and a container](https://images.prismic.io/turing/658bf95d531ac2845a26f2b1_Image_07_08_23_at_1_27_PM_3edb52248a.webp?auto=format,compress)
 </details>
 
 <details>
