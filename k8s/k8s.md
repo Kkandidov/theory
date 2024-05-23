@@ -20,3 +20,23 @@ Early on, applications were deployed directly on physical servers, also known as
 #
 Virtualization emerged to address the limitations of the traditional deployment approach. It allows running multiple applications on the same physical server, each in its own isolated environment. This isolation reduces security risks by preventing information from one application in a VM from reaching another application in a different VM on the same server. Virtualization also improves scalability. VMs can be easily added or removed based on resource needs, making it more efficient to utilize hardware resources. This translates to cost savings as you don't need to maintain as many physical servers. In essence, virtualization allows you to present a pool of physical resources as a cluster of manageable VMs.
 </details>
+
+<details>
+<summary>4. Tell about container deployment era</summary> 
+
+#
+Containers share similarities with virtual machines (VMs) but differ in their approach to isolation. Containers utilize a single operating system kernel among applications, leading to a lighter weight and faster startup compared to VMs with their full OSes.  Like VMs, containers have their own filesystem, allocated CPU, memory, and other resources. This decoupling from the underlying system grants containers portability across various operating systems and cloud platforms.
+
+The popularity of containers stems from their numerous benefits:
+
+- **Agile application creation and deployment:** Building container images is significantly faster and easier compared to VM images.
+- **Continuous development, integration, and deployment (CI/CD):** Containers enable frequent and reliable image creation and deployment with efficient rollbacks.
+- **Dev and Ops separation of concerns:** Application container images are created at build/release time, not deployment, decoupling applications from infrastructure concerns.
+- **Observability:** Gain insights beyond just OS-level metrics. Monitor application health and other signals for better troubleshooting.
+- **Environmental consistency across development, testing, and production:** The application runs identically on your laptop as it does in the cloud.
+- **Cloud and OS distribution portability:** Containers can run on-premises or on major public clouds, offering flexibility in deployment options.
+- **Application-centric management:** Manage applications at a higher level, focusing on running them on an OS using logical resources instead of managing the entire OS on virtual hardware.
+- **Loose coupling:** Break applications into smaller, independent pieces for dynamic deployment and management.
+- **Resource isolation:** Containers provide predictable application performance due to resource allocation.
+- **Resource utilization:** Containers promote high efficiency and density, allowing you to run more applications on a single server.
+</details>
