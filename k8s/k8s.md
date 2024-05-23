@@ -15,7 +15,7 @@ Early on, applications were deployed directly on physical servers, also known as
 </details>
 
 <details>
-<summary>2. Tell about the virtualization deployment era</summary> 
+<summary>3. Tell about the virtualization deployment era</summary> 
 
 #
 Virtualization emerged to address the limitations of the traditional deployment approach. It allows running multiple applications on the same physical server, each in its own isolated environment. This isolation reduces security risks by preventing information from one application in a VM from reaching another application in a different VM on the same server. Virtualization also improves scalability. VMs can be easily added or removed based on resource needs, making it more efficient to utilize hardware resources. This translates to cost savings as you don't need to maintain as many physical servers. In essence, virtualization allows you to present a pool of physical resources as a cluster of manageable VMs.
